@@ -1,0 +1,81 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Beautiful Blinds & Shades service area",
+        "description": "Approximate outer outline around the 17 communities listed on the client website.",
+        "source": "https://www.beautifulblindsandshades.com/location/beautiful-blinds-and-shades-service-area",
+        "coordinate_source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_place_national.zip"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -85.895476,
+              41.246053
+            ],
+            [
+              -85.88171,
+              41.220597
+            ],
+            [
+              -85.205345,
+              40.718023
+            ],
+            [
+              -85.172111,
+              40.707479
+            ],
+            [
+              -85.138877,
+              40.718023
+            ],
+            [
+              -84.834444,
+              40.948124
+            ],
+            [
+              -84.820678,
+              40.97358
+            ],
+            [
+              -84.717739,
+              41.294388
+            ],
+            [
+              -84.731505,
+              41.319844
+            ],
+            [
+              -84.977751,
+              41.666514
+            ],
+            [
+              -85.010985,
+              41.677058
+            ],
+            [
+              -85.749766,
+              41.457908
+            ],
+            [
+              -85.783,
+              41.447364
+            ],
+            [
+              -85.88171,
+              41.271509
+            ],
+            [
+              -85.895476,
+              41.246053
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

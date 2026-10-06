@@ -1,0 +1,35 @@
+{
+  "source": "Google review screenshots supplied by the client on September 22, 2026. Text transcribed verbatim, including original grammar. Duplicate name-only screenshot omitted. Relative dates intentionally omitted from display.",
+  "reviews": [
+    {
+      "name": "John Bennett",
+      "rating": 5,
+      "text": "A great experience! David is easy to work with, kind, respectful, patient but mostly highly knowledgeable about window treatments. We found him through our Costco Graber membership. His background in installation and cleaning make him especially valuable. We are happy with our purchase and highly recommend him.",
+      "sourceScreenshot": "Screenshot 2026-09-22 at 11.04.57 AM.png"
+    },
+    {
+      "name": "Jan Shipe",
+      "rating": 5,
+      "text": "David is a professional who is very easy to work with. He walked us through picking out the blinds, the app, remote and how to operate the blinds. Installation was quick and easy. We are very pleased with how the whole process went with David from Beautiful Blinds. We would call him again for any other blinds.",
+      "sourceScreenshot": "Screenshot 2026-09-22 at 11.05.09 AM.png"
+    },
+    {
+      "name": "Doug Barcalow",
+      "rating": 5,
+      "text": "We had David give us a quote on new blinds for our home. He was profession and prompt, never pressured us, and helped us consider options we were not aware of. When we ordered our blinds, he let us know they were in and had them installed in less time than it would have taken me to get my tools and read the instructions! He does great work and we are happy to recommend him and his service.",
+      "sourceScreenshot": "Screenshot 2026-09-22 at 11.05.21 AM.png"
+    },
+    {
+      "name": "Erica Jamison",
+      "rating": 5,
+      "text": "Beautiful Blinds and Shades restored my window blinds to look great! My blinds were mismatched for years and now they look finished and great! Service was prompt and efficient. Will definitely use again!",
+      "sourceScreenshot": "Screenshot 2026-09-22 at 11.05.29 AM.png"
+    },
+    {
+      "name": "Allison Hanford",
+      "rating": 5,
+      "text": "As an interior designer I recommend David for all my projects! He measures and install perfectly, he is timely and communicative. He is knowledgeable about all his products. He’s the best in the business.",
+      "sourceScreenshot": "Screenshot 2026-09-22 at 11.05.43 AM.png"
+    }
+  ]
+}

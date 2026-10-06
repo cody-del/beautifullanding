@@ -1,0 +1,108 @@
+{
+  "source": "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2025_Gazetteer/2025_Gaz_place_national.zip",
+  "area_source": "https://www.beautifulblindsandshades.com/location/beautiful-blinds-and-shades-service-area",
+  "places": [
+    {
+      "name": "Angola",
+      "state": "IN",
+      "lat": 41.641058,
+      "lon": -85.010985
+    },
+    {
+      "name": "Auburn",
+      "state": "IN",
+      "lat": 41.367727,
+      "lon": -85.056515
+    },
+    {
+      "name": "Bluffton",
+      "state": "IN",
+      "lat": 40.743479,
+      "lon": -85.172111
+    },
+    {
+      "name": "Columbia City",
+      "state": "IN",
+      "lat": 41.163051,
+      "lon": -85.478751
+    },
+    {
+      "name": "Fort Wayne",
+      "state": "IN",
+      "lat": 41.088193,
+      "lon": -85.142791
+    },
+    {
+      "name": "Grabill",
+      "state": "IN",
+      "lat": 41.209472,
+      "lon": -84.968164
+    },
+    {
+      "name": "Harlan",
+      "state": "IN",
+      "lat": 41.197639,
+      "lon": -84.922998
+    },
+    {
+      "name": "Hicksville",
+      "state": "OH",
+      "lat": 41.294388,
+      "lon": -84.764739
+    },
+    {
+      "name": "Hoagland",
+      "state": "IN",
+      "lat": 40.951963,
+      "lon": -84.995472
+    },
+    {
+      "name": "Huntertown",
+      "state": "IN",
+      "lat": 41.217275,
+      "lon": -85.161408
+    },
+    {
+      "name": "Kendallville",
+      "state": "IN",
+      "lat": 41.443361,
+      "lon": -85.258154
+    },
+    {
+      "name": "Leo-Cedarville",
+      "state": "IN",
+      "lat": 41.220642,
+      "lon": -85.021856
+    },
+    {
+      "name": "Monroeville",
+      "state": "IN",
+      "lat": 40.97358,
+      "lon": -84.867678
+    },
+    {
+      "name": "New Haven",
+      "state": "IN",
+      "lat": 41.067905,
+      "lon": -85.016282
+    },
+    {
+      "name": "Syracuse",
+      "state": "IN",
+      "lat": 41.421908,
+      "lon": -85.749766
+    },
+    {
+      "name": "Warsaw",
+      "state": "IN",
+      "lat": 41.246053,
+      "lon": -85.848476
+    },
+    {
+      "name": "Woodburn",
+      "state": "IN",
+      "lat": 41.128114,
+      "lon": -84.850513
+    }
+  ]
+}
