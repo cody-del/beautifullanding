@@ -2,6 +2,8 @@
 
 Independent design review for custom window treatments and motorized shades. The page retains the Beacon Blinds / Shutter Factory layout: photographic hero and floating white header, review carousel, image-and-copy sections, benefit cards, outlined service map, center-focused inspiration gallery, and a final consultation card. The brand colors are the client's blue `#67b2e8` and green `#bfdd9f`; headings reuse the existing Beautiful Blinds Manrope fonts.
 
+The October 6 copy revision reduces supporting paragraphs and foregrounds the five requested differentiators: motorization, expert installation, manufacturer warranties with local support, quality products, and measurements/installation personally handled by owner David Fear. Owner involvement is confirmed by the client. Warranty wording reflects the existing window-treatment service content without promising a particular term or universal coverage.
+
 Run `python3 scripts/build-page.py` from this directory to regenerate the HTML and map assets. Serve `dist/` with `python3 -m http.server 4325 --bind 127.0.0.1 --directory dist`.
 
 The review copy is transcribed from the five client-supplied review screenshots in the existing homepage project. Room images are reused style inspiration from that project, including staged imagery; they are not presented as verified installation photography. Asset origins are documented in `../homepage/research/assets.json` and `../homepage/README.md`.
