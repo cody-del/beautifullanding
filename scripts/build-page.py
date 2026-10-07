@@ -49,14 +49,8 @@ cards = ''.join(f'''<article class="reviews-card" aria-label="Review by {escape(
 <div class="reviews-author"><span class="reviews-avatar" style="--avatar-color:{colors[i]}" aria-hidden="true">{r['name'][0]}</span><span class="reviews-name">{escape(r['name'])}</span></div></article>''' for i, r in enumerate(reviews))
 order = ['Fort Wayne', 'Huntertown', 'Leo-Cedarville', 'New Haven', 'Auburn', 'Columbia City', 'Grabill', 'Woodburn', 'Monroeville', 'Harlan', 'Hoagland', 'Angola', 'Kendallville', 'Bluffton', 'Warsaw', 'Syracuse', 'Hicksville']
 cities = ''.join(f'<li>{n}{", OH" if n == "Hicksville" else ""}</li>' for n in order)
-photos = [
-    ('roller-shades-fort-wayne-indiana.jpg', 'Soft neutral roller shades in a bright living room'),
-    ('cellular-shades-fort-wayne-indiana.jpg', 'Cellular shades for a warm, comfortable living room'),
-    ('roman-shades-fort-wayne-indiana.jpg', 'Tailored Roman shades with soft fabric folds'),
-    ('layered-shades-fort-wayne-indiana.jpg', 'Layered shades with alternating sheer and opaque bands'),
-    ('natural-shades-fort-wayne-indiana.jpg', 'Woven natural shades adding texture to a room'),
-    ('solar-shades-fort-wayne-indiana.jpg', 'Solar shades filtering bright daylight')]
-slides = ''.join(f'<button class="shade-carousel-slide{" is-active" if i == 0 else ""}" type="button" aria-label="Photo {i+1} of {len(photos)}"><img src="assets/{filename}" alt="{alt}" loading="lazy" decoding="async" width="1500" height="1000"></button>' for i, (filename, alt) in enumerate(photos))
+photos = json.loads((ROOT / 'content/installation-photos.json').read_text())['photos']
+slides = ''.join(f'<button class="shade-carousel-slide{" is-active" if i == 0 else ""}" type="button" aria-label="Photo {i+1} of {len(photos)}"><img class="installation-photo" src="assets/installations/{p["name"]}-{p["width"]}.webp" srcset="assets/installations/{p["name"]}-640.webp 640w, assets/installations/{p["name"]}-{p["width"]}.webp {p["width"]}w" sizes="(max-width:700px) 84vw, (max-width:1228px) 70vw, 860px" alt="{escape(p["alt"])}" loading="lazy" decoding="async" width="{p["width"]}" height="{p["height"]}"></button>' for i, p in enumerate(photos))
 fields = [('firstName', 'First name', 'text', 'given-name', 'Jane'), ('lastName', 'Last name', 'text', 'family-name', 'Smith'), ('phone', 'Phone number', 'tel', 'tel', '(260) 555-0123'), ('email', 'Email address', 'email', 'email', 'jane@example.com')]
 inputs = ''.join(f'<div class="hardwood-field"><label for="{name}">{label}</label><input id="{name}" name="{name}" type="{kind}" autocomplete="{ac}" placeholder="{placeholder}" maxlength="{254 if kind == "email" else 100}" required aria-describedby="{name}-error"><p id="{name}-error" class="hardwood-field-error" hidden></p></div>' for name, label, kind, ac, placeholder in fields)
 html = f'''<!doctype html>
@@ -64,7 +58,7 @@ html = f'''<!doctype html>
 <title>Custom Window Treatments &amp; Motorized Shades | Beautiful Blinds &amp; Shades</title>
 <meta name="description" content="Quality custom window treatments and motorized shades in Fort Wayne. Owner David Fear measures and installs. Manufacturer warranties, local support, and a free consultation.">
 <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#67b2e8">
-<link rel="icon" href="assets/mark.png"><link rel="preload" as="image" href="assets/hero.jpeg"><link rel="preload" as="font" href="assets/manrope-500.ttf" type="font/ttf" crossorigin>
+<link rel="icon" href="assets/mark.png"><link rel="preload" as="image" href="assets/installations/living-room-roller-shades-raised-1440.webp" media="(min-width:701px)"><link rel="preload" as="image" href="assets/installations/arched-window-cellular-shades-960.webp" media="(max-width:700px)"><link rel="preload" as="font" href="assets/manrope-500.ttf" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="reviews.css"><link rel="stylesheet" href="gallery.css"><link rel="stylesheet" href="vendor/leaflet/leaflet.css"><link rel="stylesheet" href="beautiful.css"><link rel="stylesheet" href="owner-video.css">
 </head><body class="product-page product-motorized-shades"><a class="skip-link" href="#main-content">Skip to content</a>
 <main class="paper-landing" id="main-content">
@@ -99,7 +93,7 @@ html = f'''<!doctype html>
 
 <section class="hardwood-section hardwood-made motorized-section" id="motorized-shades"><div class="hardwood-container hardwood-made-grid motorized-grid">
 <div class="hardwood-made-copy"><p class="hardwood-eyebrow">Motorized shades</p><h2>Your shades.<br>At the touch of a button.</h2><p class="hardwood-body">Control light and privacy with a remote. Add app control, schedules, or voice commands with a compatible system.</p><a class="paper-button" href="#consultation">Explore Motorized Shades</a></div>
-<figure class="hardwood-workshop"><img src="assets/roller-shades-fort-wayne-indiana.jpg" alt="Roller shades in a living room with large windows" loading="lazy" decoding="async" width="1500" height="1000"><figcaption>Effortless light and privacy</figcaption></figure>
+<figure class="hardwood-workshop"><img src="assets/installations/great-room-roller-shades-1440.webp" srcset="assets/installations/great-room-roller-shades-640.webp 640w, assets/installations/great-room-roller-shades-1440.webp 1440w" sizes="(max-width:700px) calc(100vw - 44px), 50vw" alt="Custom roller shades installed across a wall of tall great room windows" loading="lazy" decoding="async" width="1440" height="1080"><figcaption>Effortless light and privacy</figcaption></figure>
 </div></section>
 
 <section id="service-area" class="hardwood-section hardwood-service-area"><div class="hardwood-container hardwood-service-area-grid">
@@ -111,7 +105,7 @@ html = f'''<!doctype html>
 </div></section>
 
 <section id="gallery" class="hardwood-section hardwood-gallery shade-gallery-section" aria-labelledby="gallery-heading"><div class="hardwood-container"><div class="hardwood-gallery-heading"><h2 id="gallery-heading">Find your style.</h2></div>
-<div class="shade-carousel" data-shade-carousel role="region" aria-roledescription="carousel" aria-label="Window treatment style inspiration"><button class="shade-carousel-arrow shade-carousel-prev" type="button" aria-label="Previous gallery photo"><span aria-hidden="true">‹</span></button><div class="shade-carousel-track">{slides}</div><button class="shade-carousel-arrow shade-carousel-next" type="button" aria-label="Next gallery photo"><span aria-hidden="true">›</span></button><div class="shade-carousel-dots" aria-label="Choose a gallery photo"></div><p class="shade-carousel-status" aria-live="polite" aria-atomic="true">Photo 1 of {len(photos)}</p></div>
+<div class="shade-carousel" data-shade-carousel role="region" aria-roledescription="carousel" aria-label="Beautiful Blinds and Shades installation photos"><button class="shade-carousel-arrow shade-carousel-prev" type="button" aria-label="Previous gallery photo"><span aria-hidden="true">‹</span></button><div class="shade-carousel-track">{slides}</div><button class="shade-carousel-arrow shade-carousel-next" type="button" aria-label="Next gallery photo"><span aria-hidden="true">›</span></button><div class="shade-carousel-dots" aria-label="Choose a gallery photo"></div><p class="shade-carousel-status" aria-live="polite" aria-atomic="true">Photo 1 of {len(photos)}</p></div>
 <a class="paper-button" href="#consultation">Find Your Window Treatments</a></div></section>
 
 <section class="hardwood-section hardwood-consultation"><div class="hardwood-container hardwood-consultation-grid"><div><h2>Book your free<br>in-home consultation.</h2><p class="hardwood-body">See samples. Explore motorization. Get your quote.</p><ul class="hardwood-consultation-benefits"><li>Meet directly with the owner</li><li>Measurements included</li><li>No-pressure guidance</li></ul><a class="paper-button" href="tel:+12602226467">Call (260) 222-6467</a><p class="consultation-hours">Monday–Friday · 9 AM–5 PM</p></div>
@@ -119,4 +113,4 @@ html = f'''<!doctype html>
 </main><footer class="footer"><div><strong>Beautiful Blinds &amp; Shades</strong><br>Fort Wayne &amp; Northeast Indiana<br><a href="mailto:info@beautifulblindsandshades.com">info@beautifulblindsandshades.com</a></div><div class="footer-links"><a href="https://www.beautifulblindsandshades.com/">Visit Our Website</a><a href="tel:+12602226467">(260) 222-6467</a></div><span>© 2026 Beautiful Blinds &amp; Shades</span></footer>
 <script src="reviews.js" defer></script><script src="gallery.js" defer></script><script src="form.js" defer></script><script src="owner-video.js" defer></script><script src="vendor/leaflet/leaflet.js" defer></script><script src="service-area.js" defer></script></body></html>'''
 (OUT / 'index.html').write_text(html)
-print(f'Built page with {len(reviews)} sourced reviews, {len(photos)} inspiration images, and one outline around all {len(places["places"])} service communities.')
+print(f'Built page with {len(reviews)} sourced reviews, {len(photos)} client installation photos, and one outline around all {len(places["places"])} service communities.')

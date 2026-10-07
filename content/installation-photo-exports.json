@@ -1,0 +1,162 @@
+[
+  {
+    "file": "dist/assets/installations/living-room-roller-shades-raised-640.webp",
+    "original": "123_1_6.jpeg",
+    "width": 640,
+    "height": 480,
+    "bytes": 44450,
+    "original_sha256": "5d880b6b1d1f274149488372dd1d0b6ef03e5658b2ffa8470cd4b62094b3dd00"
+  },
+  {
+    "file": "dist/assets/installations/living-room-roller-shades-raised-1440.webp",
+    "original": "123_1_6.jpeg",
+    "width": 1440,
+    "height": 1080,
+    "bytes": 214140,
+    "original_sha256": "5d880b6b1d1f274149488372dd1d0b6ef03e5658b2ffa8470cd4b62094b3dd00"
+  },
+  {
+    "file": "dist/assets/installations/living-room-roller-shades-lowered-640.webp",
+    "original": "123_1.jpeg",
+    "width": 640,
+    "height": 480,
+    "bytes": 28086,
+    "original_sha256": "2e5c1bc1e987a35cec3890e24ba4ded2f07c9980ae51b9fd3f6ee5586bfbe755"
+  },
+  {
+    "file": "dist/assets/installations/living-room-roller-shades-lowered-1440.webp",
+    "original": "123_1.jpeg",
+    "width": 1440,
+    "height": 1080,
+    "bytes": 176402,
+    "original_sha256": "2e5c1bc1e987a35cec3890e24ba4ded2f07c9980ae51b9fd3f6ee5586bfbe755"
+  },
+  {
+    "file": "dist/assets/installations/great-room-roller-shades-640.webp",
+    "original": "123_1_1.jpeg",
+    "width": 640,
+    "height": 480,
+    "bytes": 44146,
+    "original_sha256": "2f7613c2c723a9d4379493c9b525e1bb36e5dd22ef8907a8416b577df1cdba55"
+  },
+  {
+    "file": "dist/assets/installations/great-room-roller-shades-1440.webp",
+    "original": "123_1_1.jpeg",
+    "width": 1440,
+    "height": 1080,
+    "bytes": 208898,
+    "original_sha256": "2f7613c2c723a9d4379493c9b525e1bb36e5dd22ef8907a8416b577df1cdba55"
+  },
+  {
+    "file": "dist/assets/installations/sitting-room-plantation-shutters-640.webp",
+    "original": "123_1_9.jpeg",
+    "width": 640,
+    "height": 853,
+    "bytes": 49700,
+    "original_sha256": "eaefcd037e3b8be59911c3a7b51079cac9ad5d626b8c81387ca59d3afbd5d11f"
+  },
+  {
+    "file": "dist/assets/installations/sitting-room-plantation-shutters-960.webp",
+    "original": "123_1_9.jpeg",
+    "width": 960,
+    "height": 1280,
+    "bytes": 91534,
+    "original_sha256": "eaefcd037e3b8be59911c3a7b51079cac9ad5d626b8c81387ca59d3afbd5d11f"
+  },
+  {
+    "file": "dist/assets/installations/living-room-top-down-cellular-shades-640.webp",
+    "original": "123_1_5.jpeg",
+    "width": 640,
+    "height": 480,
+    "bytes": 30506,
+    "original_sha256": "1bda4d81e651991fdec0f6fec5b170b7c17ce5046ebb0cacadb73a6242b74854"
+  },
+  {
+    "file": "dist/assets/installations/living-room-top-down-cellular-shades-1440.webp",
+    "original": "123_1_5.jpeg",
+    "width": 1440,
+    "height": 1080,
+    "bytes": 145180,
+    "original_sha256": "1bda4d81e651991fdec0f6fec5b170b7c17ce5046ebb0cacadb73a6242b74854"
+  },
+  {
+    "file": "dist/assets/installations/high-window-roller-shades-640.webp",
+    "original": "123_1_4.jpeg",
+    "width": 640,
+    "height": 480,
+    "bytes": 24626,
+    "original_sha256": "a1f48b3f370c2b2afda0fe511ceb12c8bd1cf68c7440a3c8ee0cb0d0f175adcb"
+  },
+  {
+    "file": "dist/assets/installations/high-window-roller-shades-1440.webp",
+    "original": "123_1_4.jpeg",
+    "width": 1440,
+    "height": 1080,
+    "bytes": 137128,
+    "original_sha256": "a1f48b3f370c2b2afda0fe511ceb12c8bd1cf68c7440a3c8ee0cb0d0f175adcb"
+  },
+  {
+    "file": "dist/assets/installations/kitchen-patterned-roller-shade-640.webp",
+    "original": "123_1_8.jpeg",
+    "width": 640,
+    "height": 853,
+    "bytes": 47606,
+    "original_sha256": "cac9bb8dfaadd2613e588f4c3a28e36839c9786dfc6be6633afcbf014a1ab4ba"
+  },
+  {
+    "file": "dist/assets/installations/kitchen-patterned-roller-shade-960.webp",
+    "original": "123_1_8.jpeg",
+    "width": 960,
+    "height": 1280,
+    "bytes": 102348,
+    "original_sha256": "cac9bb8dfaadd2613e588f4c3a28e36839c9786dfc6be6633afcbf014a1ab4ba"
+  },
+  {
+    "file": "dist/assets/installations/arched-window-cellular-shades-640.webp",
+    "original": "123_1_7.jpeg",
+    "width": 640,
+    "height": 853,
+    "bytes": 76372,
+    "original_sha256": "f7ec286af04107e0b35d6a22fa3ff73778234a5de59a12779cfc03a9ed9f120d"
+  },
+  {
+    "file": "dist/assets/installations/arched-window-cellular-shades-960.webp",
+    "original": "123_1_7.jpeg",
+    "width": 960,
+    "height": 1280,
+    "bytes": 168474,
+    "original_sha256": "f7ec286af04107e0b35d6a22fa3ff73778234a5de59a12779cfc03a9ed9f120d"
+  },
+  {
+    "file": "dist/assets/installations/three-panel-plantation-shutters-640.webp",
+    "original": "123_1_3.jpeg",
+    "width": 640,
+    "height": 853,
+    "bytes": 67992,
+    "original_sha256": "068506b72bf1738ddd04b97f1bcefb7b9d2c5ccd6e8ff75fccbe81777549b3a1"
+  },
+  {
+    "file": "dist/assets/installations/three-panel-plantation-shutters-960.webp",
+    "original": "123_1_3.jpeg",
+    "width": 960,
+    "height": 1280,
+    "bytes": 128702,
+    "original_sha256": "068506b72bf1738ddd04b97f1bcefb7b9d2c5ccd6e8ff75fccbe81777549b3a1"
+  },
+  {
+    "file": "dist/assets/installations/bedroom-cellular-shade-640.webp",
+    "original": "123_1_2.jpeg",
+    "width": 640,
+    "height": 853,
+    "bytes": 69406,
+    "original_sha256": "cc84ec89ca37fdfb100a06d033c97bc79cb4d379ce92cc4e838afe43dbb11ba1"
+  },
+  {
+    "file": "dist/assets/installations/bedroom-cellular-shade-960.webp",
+    "original": "123_1_2.jpeg",
+    "width": 960,
+    "height": 1280,
+    "bytes": 175600,
+    "original_sha256": "cc84ec89ca37fdfb100a06d033c97bc79cb4d379ce92cc4e838afe43dbb11ba1"
+  }
+]
