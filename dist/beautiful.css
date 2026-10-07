@@ -13,3 +13,9 @@ body{color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.7}a{t
 .product-motorized-shades .shade-carousel-slide{background:#edf1f3}
 .product-motorized-shades .shade-carousel-slide img.installation-photo{object-fit:contain}
 @media(max-width:700px){.paper-hero{background-image:linear-gradient(180deg,#152a365f,#132731a6 52%,#102532d9),url('assets/installations/arched-window-cellular-shades-960.webp');background-position:center 54%}}
+
+/* Matching capsule corners for the header and action buttons at every breakpoint. */
+.paper-landing .paper-header,
+.paper-landing .paper-button,
+.paper-landing .map-reset,
+.paper-landing .owner-video-fallback{border-radius:9999px}
