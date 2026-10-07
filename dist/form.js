@@ -26,7 +26,7 @@
     const valid = fields.map(validate);
     if (valid.some(result => !result)) {fields[valid.indexOf(false)].focus(); return;}
     // This design-review form deliberately does not transmit or persist lead data.
-    status.innerHTML = 'This preview does not send your details. To book your consultation, <a href="tel:+12602226467">call (260) 222-6467</a> or <a href="https://www.beautifulblindsandshades.com/contact" target="_blank" rel="noopener">use our contact page</a>.';
+    status.innerHTML = 'This preview does not send your details. To book your consultation, <a href="tel:+12602226467">call (260) 222-6467</a>.';
     status.hidden = false;
   });
 })();
