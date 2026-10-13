@@ -1,5 +1,7 @@
 # Beautiful Blinds & Shades landing page
 
+This landing page has its own GitHub repository: [cody-del/beautifullanding](https://github.com/cody-del/beautifullanding), on branch `main`. Keep its source and assets separate from the main website repository, `cody-del/BEAUTIFUL`. The existing Sites publication is configured by `.openai/hosting.json`; `dist/` contains the complete static landing page.
+
 Independent design review for custom window treatments and motorized shades. The page retains the Beacon Blinds / Shutter Factory layout: photographic hero and floating white header, review carousel, image-and-copy sections, benefit cards, outlined service map, center-focused inspiration gallery, and a final consultation card. The brand colors are the client's blue `#67b2e8` and green `#bfdd9f`; headings reuse the existing Beautiful Blinds Manrope fonts.
 
 The October 6 copy revision reduces supporting paragraphs and foregrounds the five requested differentiators: motorization, expert installation, manufacturer warranties with local support, quality products, and measurements/installation personally handled by owner David Fear. Owner involvement is confirmed by the client. Warranty wording reflects the existing window-treatment service content without promising a particular term or universal coverage.
