@@ -99,5 +99,5 @@
 }
 @media (max-width: 700px) {
   .owner-intro-grid { grid-template-columns: 1fr; gap: 30px; }
-  .owner-video { max-width: 330px; }
+  .owner-video { max-width: 240px; }
 }

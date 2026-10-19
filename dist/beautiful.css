@@ -19,3 +19,39 @@ body{color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.7}a{t
 .paper-landing .paper-button,
 .paper-landing .map-reset,
 .paper-landing .owner-video-fallback{border-radius:9999px}
+
+/* Keep the quote action available while mobile visitors browse. */
+.paper-hero-content .paper-eyebrow{margin:0;color:var(--green);font-size:13px;font-weight:700;line-height:1.5;letter-spacing:.1em;text-transform:uppercase}
+.hardwood-field-full{grid-column:1/-1}
+.mobile-conversion-bar{display:none}
+@media(max-width:700px){
+  html{scroll-padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))}
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .mobile-conversion-bar{position:fixed;inset:auto 0 0;z-index:1000;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:#fff;box-shadow:0 -6px 24px #142b3c12}
+  .mobile-action{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:50px;padding:12px;border:1px solid var(--link);border-radius:9999px;font:700 15px/1.2 Manrope,Arial,sans-serif;text-align:center}
+  .mobile-action-call{color:var(--link);background:#fff}
+  .mobile-action-quote{color:#273720;background:var(--green);border-color:var(--green)}
+  .mobile-action:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  body:has(.hardwood-form input:focus) .mobile-conversion-bar{display:none}
+  .paper-hero-content{padding-top:36px;padding-bottom:36px;gap:18px}
+  .paper-hero-content .paper-eyebrow{font-size:11px;letter-spacing:.08em}
+  .hardwood-section{padding-block:40px}
+  .hardwood-section .hardwood-eyebrow{margin-bottom:14px}
+  .hardwood-made-grid,.motorized-grid,.owner-intro-grid{gap:24px}
+  .hardwood-made-copy .hardwood-body{margin-top:16px}
+  .hardwood-made-copy>.paper-button{margin-top:22px}
+  .hardwood-value-grid{margin-top:22px;gap:12px}
+  .hardwood-value-card{padding:20px}
+  .hardwood-value-card p{font-size:16px;line-height:1.55}
+  .paper-landing .hardwood-form-fields{grid-template-columns:1fr}
+  .hardwood-consultation-grid{gap:26px}
+  .hardwood-consultation .hardwood-body{margin-top:16px}
+  .paper-landing .hardwood-consultation-benefits{margin-block:20px 24px;gap:12px}
+  .hardwood-consultation-grid>div:first-child>.paper-button,.paper-landing .hardwood-consultation-benefits{display:none}
+  .service-featured-cities{display:none}
+  .beautiful-service-map{height:280px}
+  .hardwood-service-area-copy .hardwood-body{margin-top:16px}
+  .hardwood-service-area-grid{gap:22px}
+  .paper-landing .shade-carousel{margin-block:22px 24px}
+}
+@media print{.mobile-conversion-bar{display:none}}
