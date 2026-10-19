@@ -1,0 +1,5 @@
+# The checked-in static landing page is ready to publish without a build step.
+[build]
+  base = "."
+  command = ""
+  publish = "dist"

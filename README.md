@@ -2,6 +2,8 @@
 
 This landing page has its own GitHub repository: [cody-del/beautifullanding](https://github.com/cody-del/beautifullanding), on branch `main`. Keep its source and assets separate from the main website repository, `cody-del/BEAUTIFUL`. The existing Sites publication is configured by `.openai/hosting.json`; `dist/` contains the complete static landing page.
 
+Netlify serves this landing page at `https://go.beautifulblindsandshades.com/`. The root `netlify.toml` sets the repository base to `.` and the publish directory to `dist`, with no build command because the complete static output is checked in. Publishing the repository root causes the domain root to return 404 while the page is only available under `/dist/`. After content edits, regenerate `dist/` before pushing to `main`.
+
 Independent design review for custom window treatments and motorized shades. The page retains the Beacon Blinds / Shutter Factory layout: photographic hero and floating white header, review carousel, image-and-copy sections, benefit cards, outlined service map, center-focused inspiration gallery, and a final consultation card. The brand colors are the client's blue `#67b2e8` and green `#bfdd9f`; headings reuse the existing Beautiful Blinds Manrope fonts.
 
 The October 6 copy revision reduces supporting paragraphs and foregrounds the five requested differentiators: motorization, expert installation, manufacturer warranties with local support, quality products, and measurements/installation personally handled by owner David Fear. Owner involvement is confirmed by the client. Warranty wording reflects the existing window-treatment service content without promising a particular term or universal coverage.
