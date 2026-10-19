@@ -56,3 +56,5 @@ body{color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.7}a{t
   .paper-landing .shade-carousel{margin-block:22px 24px}
 }
 @media print{.mobile-conversion-bar{display:none}}
+/* Thank-you state after a lead reaches GHL: the same white card as the quote form. */
+.hardwood-form-success{background:#fff;border-color:var(--line);color:var(--ink);text-align:center}.hardwood-form-success h3{font-size:25px;line-height:1.35}.hardwood-form-success p{color:var(--muted);font-size:17px}.hardwood-success-mark{color:var(--green);font-size:40px}.hardwood-form-success a{display:inline-block;margin-top:24px;color:var(--link);font-size:15px;font-weight:600;text-decoration:underline}.hardwood-form-success:focus{outline:none}

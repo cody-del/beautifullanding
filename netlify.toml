@@ -1,5 +1,15 @@
-# The checked-in static landing page is ready to publish without a build step.
+# The checked-in static landing page needs no build step; the build only runs
+# the tests, so a failing test stops the deploy.
 [build]
   base = "."
-  command = ""
+  command = "node --test tests/owner-video.test.cjs tests/consultation.test.mjs tests/consultation-http.test.mjs tests/form.test.cjs"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# /api/consultation upserts quote-form leads into GoHighLevel. It needs the
+# GHL_PRIVATE_TOKEN and GHL_LOCATION_ID environment variables.
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
