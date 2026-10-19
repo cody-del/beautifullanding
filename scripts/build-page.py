@@ -55,6 +55,8 @@ fields = [('fullName', 'Full name', 'text', 'name', 'Jane Smith'), ('phone', 'Ph
 inputs = ''.join(f'<div class="hardwood-field{" hardwood-field-full" if name == "fullName" else ""}"><label for="{name}">{label}</label><input id="{name}" name="{name}" type="{kind}" autocomplete="{ac}" placeholder="{placeholder}" maxlength="{254 if kind == "email" else 100}" required aria-describedby="{name}-error"><p id="{name}-error" class="hardwood-field-error" hidden></p></div>' for name, label, kind, ac, placeholder in fields)
 html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- ClickCease click-fraud protection -->
+<script async src="https://ob.belvionetta.com/i/0e13a86f5e1ddc25e31480c0ba4dc8d3.js" class="ct_clicktrue"></script>
 <!-- Google tag (gtag.js): Google Ads account plus the phone call conversion, which swaps in a forwarding number for ad visitors. -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18483436683"></script>
 <script>window.dataLayer = window.dataLayer || [];function gtag(){{dataLayer.push(arguments);}}gtag('js', new Date());gtag('config', 'AW-18483436683');gtag('config', 'AW-18483436683/u3LoCM_FtaIdEIu5y-1E', {{'phone_conversion_number': '(260) 222-6467'}});</script>
@@ -63,7 +65,7 @@ html = f'''<!doctype html>
 <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#67b2e8">
 <link rel="icon" href="assets/mark.png"><link rel="preload" as="image" href="assets/installations/living-room-roller-shades-raised-1440.webp" media="(min-width:701px)"><link rel="preload" as="image" href="assets/installations/arched-window-cellular-shades-960.webp" media="(max-width:700px)"><link rel="preload" as="font" href="assets/manrope-500.ttf" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="reviews.css"><link rel="stylesheet" href="gallery.css"><link rel="stylesheet" href="vendor/leaflet/leaflet.css"><link rel="stylesheet" href="beautiful.css"><link rel="stylesheet" href="owner-video.css">
-</head><body class="product-page product-motorized-shades"><a class="skip-link" href="#main-content">Skip to content</a>
+</head><body class="product-page product-motorized-shades"><noscript><iframe src="https://ob.belvionetta.com/ns/0e13a86f5e1ddc25e31480c0ba4dc8d3.html?ch=" width="0" height="0" style="display:none"></iframe></noscript><a class="skip-link" href="#main-content">Skip to content</a>
 <main class="paper-landing" id="main-content">
 <section class="paper-hero" aria-labelledby="paper-heading"><header class="paper-header">
 <a href="#main-content" aria-label="Beautiful Blinds &amp; Shades — back to top"><img class="paper-logo" src="assets/logo.png" alt="Beautiful Blinds &amp; Shades" width="500" height="235"></a>
