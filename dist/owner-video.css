@@ -61,23 +61,14 @@
 }
 .owner-video-play-icon svg { margin-left: 5px; }
 .owner-video-play:hover .owner-video-play-icon { background: #adcf87; }
-.owner-video-play-label {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 38px 18px 18px;
-  background: linear-gradient(transparent, #142b3cee);
-  font: 600 14px/1.5 Arial, sans-serif;
-  text-align: center;
-}
 .owner-video figcaption {
   margin-top: 14px;
-  color: var(--ink);
-  font-size: 14px;
+  color: var(--muted);
+  font-size: 13px;
   line-height: 1.5;
   text-align: center;
 }
-.owner-video figcaption strong { display: block; }
-.owner-video figcaption span { color: var(--muted); font-size: 12px; }
+.owner-video figcaption strong { color: var(--ink); font-weight: 600; }
 .owner-video-fallback,
 .owner-video-error {
   font-size: 14px;
