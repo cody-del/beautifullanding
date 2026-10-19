@@ -55,6 +55,9 @@ fields = [('fullName', 'Full name', 'text', 'name', 'Jane Smith'), ('phone', 'Ph
 inputs = ''.join(f'<div class="hardwood-field{" hardwood-field-full" if name == "fullName" else ""}"><label for="{name}">{label}</label><input id="{name}" name="{name}" type="{kind}" autocomplete="{ac}" placeholder="{placeholder}" maxlength="{254 if kind == "email" else 100}" required aria-describedby="{name}-error"><p id="{name}-error" class="hardwood-field-error" hidden></p></div>' for name, label, kind, ac, placeholder in fields)
 html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Google tag (gtag.js): Google Ads account plus the phone call conversion, which swaps in a forwarding number for ad visitors. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18483436683"></script>
+<script>window.dataLayer = window.dataLayer || [];function gtag(){{dataLayer.push(arguments);}}gtag('js', new Date());gtag('config', 'AW-18483436683');gtag('config', 'AW-18483436683/u3LoCM_FtaIdEIu5y-1E', {{'phone_conversion_number': '(260) 222-6467'}});</script>
 <title>Custom Window Treatments &amp; Motorized Shades | Beautiful Blinds &amp; Shades</title>
 <meta name="description" content="Quality custom window treatments and motorized shades in Fort Wayne. Owner David Fear measures and installs. Manufacturer warranties, local support, and a free consultation.">
 <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#67b2e8">

@@ -17,6 +17,14 @@
     message.textContent = error; message.hidden = !error;
     return !error;
   }
+  // Google Ads "Submit Lead Forms" conversion, with enhanced-conversion user data set first.
+  // Call it only once a lead has actually been delivered; this form does not send leads yet.
+  function reportLeadConversion() {
+    if (typeof gtag !== 'function') return;
+    const digits = form.phone.value.replace(/\D/g, '');
+    gtag('set', 'user_data', {email: form.email.value.trim().toLowerCase(), phone_number: '+' + (digits.length === 10 ? '1' + digits : digits)});
+    gtag('event', 'conversion', {send_to: 'AW-18483436683/KcYjCIqetaIdEIu5y-1E'});
+  }
   fields.forEach(field => {
     field.addEventListener('blur', () => {if (field.value || field.getAttribute('aria-invalid') === 'true') validate(field);});
     field.addEventListener('input', () => {if (field.getAttribute('aria-invalid') === 'true') validate(field); status.hidden = true;});
