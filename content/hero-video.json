@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-20",
+  "duration_seconds": 18.625,
+  "fps": 24,
+  "transition_seconds": 0.625,
+  "audio": false,
+  "sources": [
+    {
+      "file": "20261017_120924.mp4",
+      "start": 0.5,
+      "duration": 4.0,
+      "mobile_focus": 0.5,
+      "scene": "Kitchen roller shades; cut before the ending camera movement.",
+      "sha256": "c91a1ccdaa8c4e27a86bf0255918c001f6a4581d2ab40f1a182e5c8857268fd7"
+    },
+    {
+      "file": "20261017_120958.mp4",
+      "start": 2.0,
+      "duration": 10.0,
+      "mobile_focus": 0.45,
+      "scene": "Living-room shades rising; omit the pan and shake after 12 seconds.",
+      "sha256": "bc33cac97d87b39fab328bfc1231675ed2821574832589c059a34a9b1511a493"
+    },
+    {
+      "file": "Video_1.mov",
+      "start": 22.0,
+      "duration": 6.5,
+      "mobile_focus": 0.52,
+      "scene": "Sunroom shades rising; omit later close-ups and handling the shade.",
+      "sha256": "fc2886d8026e3817943f5c2f21ccdc9ebc3e5d035055de5a8ea558ef706d7029"
+    }
+  ],
+  "variants": [
+    {
+      "name": "desktop",
+      "width": 1280,
+      "height": 720,
+      "video": "assets/hero/window-treatments-desktop.mp4",
+      "bytes": 2657731,
+      "poster": "assets/hero/window-treatments-desktop-poster.webp",
+      "poster_bytes": 62816
+    },
+    {
+      "name": "mobile",
+      "width": 576,
+      "height": 1024,
+      "video": "assets/hero/window-treatments-mobile.mp4",
+      "bytes": 1249761,
+      "poster": "assets/hero/window-treatments-mobile-poster.webp",
+      "poster_bytes": 34994
+    }
+  ],
+  "loop": "Final scene dissolves into the first scene; starts at the matching frame after the initial overlap."
+}
