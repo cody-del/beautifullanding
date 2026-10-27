@@ -11,6 +11,10 @@ const GHL_VERSION = '2021-07-28';
 export const LEAD_TAG = 'google_landing_page';
 // Page attribution rides on the contact's source.
 export const LEAD_SOURCE = 'Google Ads Landing Page (go.beautifulblindsandshades.com)';
+// Added only when the visitor ticked the optional text-message box; a phone
+// number alone is not consent. The same tag Shade Strategy's A2P sites use
+// (Shenandoah, Sky Window), so texting workflows can check one tag.
+export const SMS_OPT_IN_TAG = 'sms-transactional-opt-in';
 
 // Submissions sooner than this after the page loads are refused. form.js waits
 // it out, so a person is never caught by it.
@@ -34,6 +38,7 @@ export async function submitConsultation(data, {fetcher = fetch, rateLimited = (
   }
   const digits = data.phone.replace(/\D/g, '');
   if (!/^\d{10}$|^1\d{10}$/.test(digits) || !EMAIL.test(data.email.trim())) return fail(400, 'Please enter a valid phone number and email address.');
+  if (data.smsOptIn !== undefined && typeof data.smsOptIn !== 'boolean') return fail(400, 'Please check your contact details.');
   if (rateLimited()) return fail(429, `Too many requests. Please wait a few minutes or call ${PHONE}.`);
 
   const token = env.GHL_PRIVATE_TOKEN || env.GHL_API_KEY;
@@ -51,7 +56,7 @@ export async function submitConsultation(data, {fetcher = fetch, rateLimited = (
     phone: `+${digits.length === 10 ? '1' : ''}${digits}`,
     email: data.email.trim().toLowerCase(),
     source: LEAD_SOURCE,
-    tags: [LEAD_TAG],
+    tags: [LEAD_TAG, ...(data.smsOptIn === true ? [SMS_OPT_IN_TAG] : [])],
   };
   try {
     const response = await fetcher(GHL_UPSERT_URL, {

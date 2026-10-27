@@ -2,7 +2,7 @@
 # the tests, so a failing test stops the deploy.
 [build]
   base = "."
-  command = "node --test tests/hero-video.test.cjs tests/owner-video.test.cjs tests/consultation.test.mjs tests/consultation-http.test.mjs tests/form.test.cjs"
+  command = "node --test tests/hero-video.test.cjs tests/owner-video.test.cjs tests/consultation.test.mjs tests/consultation-http.test.mjs tests/form.test.cjs tests/sms-consent.test.mjs tests/legal-pages.test.mjs"
   publish = "dist"
 
 [build.environment]
