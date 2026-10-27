@@ -23,7 +23,8 @@
     message.textContent = error; message.hidden = !error;
     return !error;
   }
-  // Google Ads "Submit Lead Forms" conversion, with enhanced-conversion user data set first.
+  // Google Ads "Submit Lead Forms" conversion, with enhanced-conversion user data set first,
+  // and the GA4 lead event on the production host.
   // Called only for a lead GHL confirmed. The transaction id is keyed by the contact id,
   // which GHL reuses when the same person submits again, so Google counts that person once.
   // Tracking must never hold up or break the form.
@@ -33,6 +34,10 @@
       const digits = form.phone.value.replace(/\D/g, '');
       gtag('set', 'user_data', {email: form.email.value.trim().toLowerCase(), phone_number: '+' + (digits.length === 10 ? '1' + digits : digits)});
       gtag('event', 'conversion', {send_to: 'AW-18483436683/KcYjCIqetaIdEIu5y-1E', transaction_id: 'lead_' + contactId});
+      // GA4 (www.beautifulblindsandshades.com's property) gets one generate_lead, to GA4 only
+      // (send_to), from the production host only, where index.html configures it. No name,
+      // email or phone in these parameters: they go to Google Analytics.
+      if (location.hostname === 'go.beautifulblindsandshades.com') gtag('event', 'generate_lead', {send_to: 'G-TBE6JC5ZYG', form_name: 'landing_page_form'});
     } catch {
       // A blocked or broken tag skips the conversion; the lead is already in GHL.
     }
