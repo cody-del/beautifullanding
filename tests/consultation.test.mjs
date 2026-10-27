@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {submitConsultation, GHL_UPSERT_URL, LEAD_TAG, LEAD_SOURCE, MIN_FILL_MS} from '../netlify/lib/consultation.mjs';
+import {submitConsultation, GHL_UPSERT_URL, LEAD_TAG, LEAD_SOURCE, MIN_FILL_MS, SMS_OPT_IN_TAG} from '../netlify/lib/consultation.mjs';
 
 const env = {GHL_PRIVATE_TOKEN: 'pit-test', GHL_LOCATION_ID: 'location-1'};
 const valid = {fullName: 'Test Person', phone: '(260) 555-0123', email: 'test@example.com', website: '', elapsedMs: 20000};
@@ -24,6 +24,7 @@ test('incomplete, invalid and spam requests never reach GHL', async () => {
     {...valid, website: 'https://spam.example'},
     {...valid, elapsedMs: undefined}, {...valid, elapsedMs: MIN_FILL_MS - 1},
     {...valid, elapsedMs: '20000'}, {...valid, elapsedMs: 20000.5},
+    {...valid, smsOptIn: 'on'}, {...valid, smsOptIn: 1},
   ]) {
     const result = await submitConsultation(data, {env, fetcher: mustNotCall, rateLimited: mustNotCall});
     assert.equal(result.status, 400, JSON.stringify(data));
@@ -112,4 +113,17 @@ test('rate-limited visitors are told to wait, and only valid leads count toward 
   let checks = 0;
   await submitConsultation({...valid, phone: '1'}, {env, fetcher: mustNotCall, rateLimited: () => {checks++; return false;}});
   assert.equal(checks, 0);
+});
+
+test('adds the SMS opt-in tag only when the box was ticked', async () => {
+  assert.equal(SMS_OPT_IN_TAG, 'sms-transactional-opt-in');
+  for (const [consent, tags] of [
+    [{}, ['google_landing_page']],
+    [{smsOptIn: false}, ['google_landing_page']],
+    [{smsOptIn: true}, ['google_landing_page', 'sms-transactional-opt-in']],
+  ]) {
+    const {sent, fetcher} = capture();
+    await submitConsultation({...valid, ...consent}, {env, fetcher});
+    assert.deepEqual(sent.body.tags, tags, JSON.stringify(consent));
+  }
 });

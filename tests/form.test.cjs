@@ -21,7 +21,7 @@ function element(props = {}) {
   };
 }
 
-function setup({values = {}, respond = async () => ({ok: true, json: async () => ({success: true, contactId: 'contact-1'})}), gtag = true, now = 20000, hostname = 'localhost'} = {}) {
+function setup({smsOptIn = false, values = {}, respond = async () => ({ok: true, json: async () => ({success: true, contactId: 'contact-1'})}), gtag = true, now = 20000, hostname = 'localhost'} = {}) {
   const value = {fullName: 'Jane Smith', phone: '(260) 555-0123', email: 'Jane@Example.com', ...values};
   const errors = {};
   const field = (id, type, label) => element({
@@ -32,7 +32,7 @@ function setup({values = {}, respond = async () => ({ok: true, json: async () =>
   const honeypot = element({id: 'website', value: ''});
   const button = element({disabled: false, textContent: 'Get My Free Quote'});
   const form = element({
-    fullName: fields[0], phone: fields[1], email: fields[2], website: honeypot,
+    fullName: fields[0], phone: fields[1], email: fields[2], website: honeypot, smsOptIn: element({id: 'smsOptIn', checked: smsOptIn}),
     querySelectorAll(selector) { assert.equal(selector, 'input[required]'); return fields; },
     querySelector(selector) { assert.equal(selector, 'button[type="submit"]'); return button; },
     reset() { this.wasReset = true; },
@@ -49,7 +49,8 @@ function setup({values = {}, respond = async () => ({ok: true, json: async () =>
     },
     FormData: class {
       constructor(target) { assert.equal(target, form); }
-      *[Symbol.iterator]() { for (const input of [honeypot, ...fields]) yield [input.id, input.value]; }
+      // Like a browser, FormData carries the box only when it is ticked, as "on".
+      *[Symbol.iterator]() { for (const input of [honeypot, ...fields]) yield [input.id, input.value]; if (smsOptIn) yield ['smsOptIn', 'on']; }
     },
     fetch: async (url, init) => { requests.push({url, ...init, body: JSON.parse(init.body)}); return respond(); },
     performance: {now: () => now},
@@ -79,7 +80,7 @@ test('a confirmed lead fires the conversion once, with user data first, then sho
   assert.equal(sent.url, '/api/consultation');
   assert.equal(sent.method, 'POST');
   assert.equal(sent.headers['Content-Type'], 'application/json');
-  assert.deepEqual(sent.body, {website: '', fullName: 'Jane Smith', phone: '(260) 555-0123', email: 'Jane@Example.com', elapsedMs: 20000});
+  assert.deepEqual(sent.body, {website: '', fullName: 'Jane Smith', phone: '(260) 555-0123', email: 'Jane@Example.com', elapsedMs: 20000, smsOptIn: false});
   assert.deepEqual(JSON.parse(JSON.stringify(page.calls)), [
     ['set', 'user_data', {email: 'jane@example.com', phone_number: '+12605550123'}],
     ['event', 'conversion', {send_to: 'AW-18483436683/KcYjCIqetaIdEIu5y-1E', transaction_id: 'lead_contact-1'}],
@@ -178,5 +179,13 @@ test('GA4 gets no lead event for a refused (honeypot, too fast) submission or of
     await page.submit();
     assert.deepEqual(page.calls.filter(([, name]) => name === 'generate_lead'), [], hostname);
     assert.equal(page.calls.filter(([, name]) => name === 'conversion').length, 1, hostname);
+  }
+});
+
+test('the text-message opt-in is sent as a boolean', async () => {
+  for (const smsOptIn of [false, true]) {
+    const page = setup({smsOptIn});
+    await page.submit();
+    assert.equal(page.requests[0].body.smsOptIn, smsOptIn);
   }
 });
