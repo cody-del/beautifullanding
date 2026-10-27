@@ -59,6 +59,8 @@
       const payload = Object.fromEntries(new FormData(form));
       // Time since the page started loading, on this browser's own clock.
       payload.elapsedMs = Math.round(performance.now());
+      // FormData leaves an unticked box out and sends a ticked one as "on"; send a boolean.
+      payload.smsOptIn = form.smsOptIn.checked === true;
       const response = await fetch('/api/consultation', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
