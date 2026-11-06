@@ -80,7 +80,8 @@ test('a confirmed lead fires the conversion once, with user data first, then sho
   assert.equal(sent.url, '/api/consultation');
   assert.equal(sent.method, 'POST');
   assert.equal(sent.headers['Content-Type'], 'application/json');
-  assert.deepEqual(sent.body, {website: '', fullName: 'Jane Smith', phone: '(260) 555-0123', email: 'Jane@Example.com', elapsedMs: 20000, smsOptIn: false});
+  // This stub page can't load Turnstile, so the token is empty and the server decides.
+  assert.deepEqual(sent.body, {website: '', fullName: 'Jane Smith', phone: '(260) 555-0123', email: 'Jane@Example.com', elapsedMs: 20000, smsOptIn: false, 'cf-turnstile-response': ''});
   assert.deepEqual(JSON.parse(JSON.stringify(page.calls)), [
     ['set', 'user_data', {email: 'jane@example.com', phone_number: '+12605550123'}],
     ['event', 'conversion', {send_to: 'AW-18483436683/KcYjCIqetaIdEIu5y-1E', transaction_id: 'lead_contact-1'}],
