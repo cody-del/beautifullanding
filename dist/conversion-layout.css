@@ -1,82 +1,89 @@
-/* Consultation-first composition, using Beautiful Blinds' existing brand and content. */
-.paper-hero { min-height: 0; padding-bottom: 54px; }
+/* One quote form, concise hero copy, and one section for customer reviews. */
+.paper-hero { min-height: 0; padding-bottom: 48px; }
 .paper-header { width: calc(100% - 64px); max-width: 1280px; min-height: 88px; padding-block: 6px; margin: 20px auto 0; box-shadow: 0 12px 32px #10253224; }
-.conversion-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "copy form" "support form"; grid-template-rows: 1fr 1fr; gap: 24px 64px; width: calc(100% - 96px); max-width: 1180px; margin: 24px auto 0; }
-.conversion-hero-grid .paper-hero-content { grid-area: copy; align-self: end; align-items: flex-start; padding: 0; gap: 22px; text-align: left; }
-.conversion-hero-grid h1 { max-width: 590px; font-size: clamp(38px, 3.8vw, 52px); line-height: 1.14; text-wrap: balance; }
-.conversion-hero-grid .paper-description { max-width: 510px; font-size: 18px; line-height: 1.65; }
-.conversion-hero-grid .consultation-anchor { grid-area: form; align-self: center; }
-.conversion-hero-support { grid-area: support; align-self: start; }
-.conversion-hero-support .paper-benefits { display: grid; justify-content: start; gap: 14px; margin: 0; padding: 0; }
-.conversion-hero-support .paper-benefits li { font-size: 16px; line-height: 1.5; }
-.conversion-hero-support .paper-hero-actions { flex-wrap: wrap; margin-top: 28px; gap: 12px; }
-.conversion-hero-support .paper-hero-actions .paper-button { min-height: 48px; padding: 13px 20px; font-size: 14px; }
-.conversion-hero-support .paper-ratings { width: fit-content; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; }
-.conversion-hero-support .paper-local-proof { font-size: 14px; }
-.conversion-hero-support .paper-local-proof > span { font-size: 14px; }
-.conversion-hero-grid .hardwood-form { padding: 24px; border-radius: 24px; box-shadow: 0 14px 42px #071b2324; }
-.conversion-hero-grid .hardwood-form-heading { margin-bottom: 16px; text-align: left; }
+.conversion-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 64px; width: calc(100% - 96px); max-width: 1180px; margin: 36px auto 0; }
+.conversion-hero-grid .paper-hero-content { align-items: flex-start; padding: 0; gap: 22px; text-align: left; }
+.conversion-hero-grid h1 { max-width: 590px; font-size: clamp(38px, 4.4vw, 56px); line-height: 1.12; text-wrap: initial; }
+.conversion-hero-grid h1 span { display: block; }
+.conversion-hero-grid .paper-description { max-width: 420px; font-size: 18px; line-height: 1.65; }
+.conversion-hero-grid .consultation-anchor { min-width: 0; }
+.conversion-hero-grid .hardwood-form { padding: 26px; border-radius: 24px; box-shadow: 0 12px 36px #071b2320; }
+.conversion-hero-grid .hardwood-form-heading { margin-bottom: 20px; text-align: left; }
 .conversion-hero-grid .hardwood-form-heading h2 { color: var(--ink); font: 500 29px/1.2 Manrope, Arial, sans-serif; letter-spacing: -.035em; }
-.conversion-hero-grid .hardwood-form-heading p { margin-top: 10px; font-size: 14px; line-height: 1.5; }
-.conversion-hero-grid .hardwood-form-fields { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.conversion-hero-grid .hardwood-form-fields { grid-template-columns: minmax(0, 1fr); gap: 12px; }
 .conversion-hero-grid .hardwood-field label { margin-bottom: 5px; font-size: 14px; line-height: 1.5; }
 .conversion-hero-grid .hardwood-field input { height: 48px; padding: 11px 13px; background: #fff; border-color: #8b969f; }
-.conversion-hero-grid .sms-consent { margin-top: 16px; }
-.conversion-hero-grid .sms-consent legend { margin-bottom: 5px; }
-.conversion-hero-grid .sms-consent-option { font-size: 13px; line-height: 1.5; }
+.conversion-hero-grid .hardwood-field input::placeholder { color: #66716b; }
 .conversion-hero-grid .hardwood-submit { margin-top: 18px; min-height: 52px; }
-.conversion-hero-grid .form-legal { margin-top: 12px; font-size: 12px; line-height: 1.5; text-align: left; }
+.conversion-hero-grid .lead-form-turnstile { margin-top: 8px; }
+.conversion-hero-grid .form-legal { margin-top: 10px; text-align: center; font-size: 14px; line-height: 1.5; }
+.conversion-hero-grid .form-legal a { display: inline-block; min-height: 28px; padding: 3px 8px; }
 .conversion-hero-grid :is(input, button, .form-status) { scroll-margin-block: 28px 110px; }
 .conversion-hero-grid .hardwood-form :focus-visible,
 .paper-header a:focus-visible { outline-color: var(--link); }
-.conversion-hero-support a:focus-visible { outline-color: white; }
 .paper-hero::before { background: linear-gradient(100deg, #102532d9 0%, #102532ba 48%, #10253252 100%); }
-.hardwood-consultation-grid { align-items: center; gap: 64px; }
-.conversion-closing-actions { max-width: 460px; width: 100%; margin-inline: auto; text-align: center; }
-.conversion-closing-actions > .paper-button { width: 100%; }
-.conversion-closing-actions .hardwood-form-reassurance { margin-top: 22px; padding-top: 20px; border-color: #ffffff40; color: white; font-size: 14px; }
-.conversion-closing-actions .hardwood-form-note { margin-top: 20px; color: #e1e7ec; font-size: 14px; line-height: 1.6; }
-.conversion-closing-actions .hardwood-form-note a { text-underline-offset: 3px; }
-.conversion-closing-actions .hardwood-google-badge { color: white; font-size: 14px; }
-.conversion-closing-actions .hardwood-google-badge .badge-stars { color: #ffcb59; }
-.conversion-hero-support .badge-stars { color: #ffcb59; }
 .paper-hero .hero-video-toggle { bottom: 8px; }
+
+/* Keep the original review text and full-review dialog, with quieter cards. */
+.reviews-section { padding: 32px; background: white; border-bottom: 1px solid var(--line); }
+.reviews-layout { max-width: 1180px; grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 18px 14px; }
+.reviews-summary { grid-column: 1 / -1; display: flex; justify-content: center; margin: 0; }
+.reviews-google-lockup { display: flex; align-items: center; gap: 10px; font: 500 20px/1.4 Manrope, Arial, sans-serif; color: var(--ink); }
+.reviews-google-lockup .reviews-google-icon { width: 26px; height: 26px; }
+.reviews-track { grid-column: 2; grid-row: 2; grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; }
+.reviews-prev { grid-column: 1; grid-row: 2; }
+.reviews-next { grid-column: 3; grid-row: 2; }
+.reviews-arrow { width: 44px; height: 44px; }
+.reviews-card { padding: 20px; border-color: var(--line); border-radius: 12px; box-shadow: none; }
+.reviews-card-top { margin-bottom: 12px; }
+.reviews-card .reviews-stars { font-size: 20px; color: #95600d; }
+.paper-landing .reviews-excerpt { -webkit-line-clamp: 3; min-height: 75px; }
+.reviews-read-more { margin: 12px 0 16px; padding-block: 3px; min-height: 28px; }
+.reviews-author { min-height: 24px; }
+.reviews-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+.hardwood-value-card { padding: 28px; border-radius: 16px; }
+.hardwood-value-card:hover { box-shadow: none; border-color: var(--line); }
+
+/* One closing quote action, with a quieter phone alternative. */
+.conversion-closing { max-width: 720px; text-align: center; }
+.conversion-closing .hardwood-body { max-width: 560px; margin: 22px auto 0; }
+.conversion-closing > .paper-button { margin-top: 26px; min-width: 240px; }
+.conversion-closing-phone { margin-top: 20px; font-size: 16px; }
+.conversion-closing-phone a { display: inline-block; padding-block: 4px; text-decoration: underline; text-underline-offset: 4px; }
+.conversion-closing .consultation-hours { margin-top: 8px !important; }
 .footer-links { flex-wrap: wrap; }
 @media (max-width: 1100px) {
-  .conversion-hero-grid { width: calc(100% - 64px); column-gap: 36px; }
-  .conversion-hero-grid h1 { font-size: 42px; }
+  .conversion-hero-grid { width: calc(100% - 64px); gap: 36px; }
+  .conversion-hero-grid h1 { font-size: 44px; }
   .conversion-hero-grid .hardwood-form { padding: 24px; }
-  .conversion-hero-support .paper-hero-actions { flex-direction: column; align-items: flex-start; }
-  .conversion-hero-support .paper-ratings { gap: 16px; }
+  .reviews-track { grid-auto-columns: calc((100% - 16px) / 2); }
 }
 @media (max-width: 800px) {
   .paper-header { width: calc(100% - 28px); min-height: 83px; margin-top: 14px; }
-  .paper-hero { padding-bottom: 40px; }
-  .conversion-hero-grid { width: calc(100% - 40px); max-width: 620px; margin-top: 32px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; grid-template-areas: "copy" "form" "support"; gap: 28px; }
+  .paper-hero { padding-bottom: 36px; }
+  .conversion-hero-grid { width: calc(100% - 40px); max-width: 620px; margin-top: 30px; grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .conversion-hero-grid .paper-hero-content { gap: 16px; }
-  .conversion-hero-grid h1 { font-size: clamp(32px, 6.5vw, 44px); max-width: 590px; }
+  .conversion-hero-grid h1 { font-size: clamp(32px, 6.5vw, 44px); }
   .conversion-hero-grid .paper-description { max-width: 560px; font-size: 17px; }
   .conversion-hero-grid .hardwood-form { padding: 24px; }
-  .conversion-hero-support .paper-benefits { gap: 10px; }
-  .conversion-hero-support .paper-benefits li { font-size: 15px; }
-  .conversion-hero-support .paper-hero-actions { flex-direction: row; margin-top: 22px; }
-  .conversion-hero-support .paper-hero-actions .paper-button { width: auto; max-width: none; }
-  .conversion-hero-support .paper-ratings { margin-top: 22px; }
-  .hardwood-consultation-grid { gap: 30px; }
 }
-@media (max-width: 430px) {
-  .conversion-hero-grid { width: calc(100% - 32px); margin-top: 28px; gap: 24px; }
-  .conversion-hero-grid .hardwood-form { padding: 22px 20px; border-radius: 20px; }
-  .conversion-hero-grid .hardwood-form-heading h2 { font-size: 26px; }
-  .conversion-hero-grid .paper-description { font-size: 16px; line-height: 1.6; }
-  .conversion-hero-support .paper-hero-actions { display: grid; grid-template-columns: 1fr; }
-  .conversion-hero-support .paper-ratings { gap: 14px; }
-}
-@media (max-width: 355px) {
-  .conversion-hero-support .paper-ratings { flex-direction: row; align-items: center; }
-  .conversion-hero-support .paper-rating-divider { display: none; }
+@media (max-width: 760px) {
+  .reviews-section { padding: 28px 20px; }
+  .reviews-layout { gap: 16px 8px; }
+  .reviews-track { grid-column: 1 / -1; grid-row: 2; grid-auto-columns: 100%; }
+  .reviews-prev { grid-column: 1; grid-row: 3; }
+  .reviews-next { grid-column: 3; grid-row: 3; }
+  .reviews-summary { margin-bottom: 0; }
 }
 @media (max-width: 700px) {
   body:has(.hardwood-form:focus-within) .mobile-conversion-bar,
   body:has(dialog[open]) .mobile-conversion-bar { display: none; }
+}
+@media (max-width: 430px) {
+  .conversion-hero-grid { width: calc(100% - 32px); margin-top: 26px; }
+  .conversion-hero-grid .hardwood-form { padding: 22px 20px; border-radius: 20px; }
+  .conversion-hero-grid .hardwood-form-heading h2 { font-size: 26px; }
+  .conversion-hero-grid .paper-description { font-size: 16px; line-height: 1.6; }
+  .hardwood-value-card { padding: 24px; }
+  .conversion-closing > .paper-button { width: 100%; min-width: 0; }
 }

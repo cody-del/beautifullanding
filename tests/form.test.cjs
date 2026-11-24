@@ -21,7 +21,7 @@ function element(props = {}) {
   };
 }
 
-function setup({smsOptIn = false, values = {}, respond = async () => ({ok: true, json: async () => ({success: true, contactId: 'contact-1'})}), gtag = true, now = 20000, hostname = 'localhost'} = {}) {
+function setup({values = {}, respond = async () => ({ok: true, json: async () => ({success: true, contactId: 'contact-1'})}), gtag = true, now = 20000, hostname = 'localhost'} = {}) {
   const value = {fullName: 'Jane Smith', phone: '(260) 555-0123', email: 'Jane@Example.com', ...values};
   const errors = {};
   const field = (id, type, label) => element({
@@ -32,7 +32,7 @@ function setup({smsOptIn = false, values = {}, respond = async () => ({ok: true,
   const honeypot = element({id: 'website', value: ''});
   const button = element({disabled: false, textContent: 'Get My Free Quote'});
   const form = element({
-    fullName: fields[0], phone: fields[1], email: fields[2], website: honeypot, smsOptIn: element({id: 'smsOptIn', checked: smsOptIn}),
+    fullName: fields[0], phone: fields[1], email: fields[2], website: honeypot,
     querySelectorAll(selector) { assert.equal(selector, 'input[required]'); return fields; },
     querySelector(selector) { assert.equal(selector, 'button[type="submit"]'); return button; },
     reset() { this.wasReset = true; },
@@ -49,8 +49,7 @@ function setup({smsOptIn = false, values = {}, respond = async () => ({ok: true,
     },
     FormData: class {
       constructor(target) { assert.equal(target, form); }
-      // Like a browser, FormData carries the box only when it is ticked, as "on".
-      *[Symbol.iterator]() { for (const input of [honeypot, ...fields]) yield [input.id, input.value]; if (smsOptIn) yield ['smsOptIn', 'on']; }
+      *[Symbol.iterator]() { for (const input of [honeypot, ...fields]) yield [input.id, input.value]; }
     },
     fetch: async (url, init) => { requests.push({url, ...init, body: JSON.parse(init.body)}); return respond(); },
     performance: {now: () => now},
@@ -183,10 +182,11 @@ test('GA4 gets no lead event for a refused (honeypot, too fast) submission or of
   }
 });
 
-test('the text-message opt-in is sent as a boolean', async () => {
-  for (const smsOptIn of [false, true]) {
-    const page = setup({smsOptIn});
-    await page.submit();
-    assert.equal(page.requests[0].body.smsOptIn, smsOptIn);
-  }
+test('the quote form submits without an SMS field and never infers text-message consent', async () => {
+  const page = setup();
+  assert.equal(page.form.smsOptIn, undefined);
+  await page.submit();
+  assert.equal(page.requests.length, 1);
+  assert.equal(page.requests[0].body.smsOptIn, false);
+  assert.equal(page.success.hidden, false);
 });

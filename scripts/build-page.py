@@ -8,7 +8,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'dist'
 places = json.loads((ROOT / 'content/service-area-places.json').read_text())
-reviews = json.loads((ROOT / 'content/reviews.json').read_text())['reviews']
+source_reviews = json.loads((ROOT / 'content/reviews.json').read_text())['reviews']
+# Keep the restoration testimonial in the source archive. This campaign is for new treatments.
+reviews = [review for review in source_reviews if review['name'] != 'Erica Jamison']
 
 # Buffer each verified Census place center before taking a single exterior hull.
 # The result indicates approximate coverage, not municipal limits or exact eligibility.
@@ -41,18 +43,17 @@ GOOGLE = '<svg class="reviews-google-icon" width="24" height="24" viewBox="0 0 2
 PHONE = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m7 3 3 5-2 2c1.3 2.9 3.1 4.7 6 6l2-2 5 3c.5 4-3 5-5 4C8 18 3 13 2 7 1 4 3 2 7 3Z"/></svg>'
 LEFT = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg>'
 RIGHT = '<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m10 5 7 7-7 7"/></svg>'
-colors = ['#517997', '#689f38', '#546e7a', '#876392', '#398375']
 cards = ''.join(f'''<article class="reviews-card" aria-label="Review by {escape(r['name'])}">
-<div class="reviews-card-top"><span class="reviews-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span>{GOOGLE}</div>
-<p class="reviews-source">Google review</p><p class="reviews-excerpt">{escape(r['text'])}</p>
+<div class="reviews-card-top"><span class="reviews-stars" role="img" aria-label="5 out of 5 stars">★★★★★</span></div>
+<p class="reviews-excerpt">{escape(r['text'])}</p>
 <button class="reviews-read-more" type="button" aria-haspopup="dialog" aria-controls="review-dialog" aria-label="Read full review by {escape(r['name'])}">Read more</button>
-<div class="reviews-author"><span class="reviews-avatar" style="--avatar-color:{colors[i]}" aria-hidden="true">{r['name'][0]}</span><span class="reviews-name">{escape(r['name'])}</span></div></article>''' for i, r in enumerate(reviews))
+<div class="reviews-author"><span class="reviews-name">{escape(r['name'])}</span></div></article>''' for r in reviews)
 order = ['Fort Wayne', 'Huntertown', 'Leo-Cedarville', 'New Haven', 'Auburn', 'Columbia City', 'Grabill', 'Woodburn', 'Monroeville', 'Harlan', 'Hoagland', 'Angola', 'Kendallville', 'Bluffton', 'Warsaw', 'Syracuse', 'Hicksville']
 cities = ''.join(f'<li>{n}{", OH" if n == "Hicksville" else ""}</li>' for n in order)
 photos = json.loads((ROOT / 'content/installation-photos.json').read_text())['photos']
 slides = ''.join(f'<button class="shade-carousel-slide{" is-active" if i == 0 else ""}" type="button" aria-label="Photo {i+1} of {len(photos)}"><img class="installation-photo" src="assets/installations/{p["name"]}-{p["width"]}.webp" srcset="assets/installations/{p["name"]}-640.webp 640w, assets/installations/{p["name"]}-{p["width"]}.webp {p["width"]}w" sizes="(max-width:700px) 84vw, (max-width:1228px) 70vw, 860px" alt="{escape(p["alt"])}" loading="lazy" decoding="async" width="{p["width"]}" height="{p["height"]}"></button>' for i, p in enumerate(photos))
 fields = [('fullName', 'Full name', 'text', 'name', 'Jane Smith'), ('phone', 'Phone number', 'tel', 'tel', '(260) 555-0123'), ('email', 'Email address', 'email', 'email', 'jane@example.com')]
-inputs = ''.join(f'<div class="hardwood-field{" hardwood-field-full" if name == "fullName" else ""}"><label for="{name}">{label}</label><input id="{name}" name="{name}" type="{kind}" autocomplete="{ac}" placeholder="{placeholder}" maxlength="{254 if kind == "email" else 100}" required aria-describedby="{name}-error"><p id="{name}-error" class="hardwood-field-error" hidden></p></div>' for name, label, kind, ac, placeholder in fields)
+inputs = ''.join(f'<div class="hardwood-field{" hardwood-field-full" if name == "fullName" else ""}"><label for="{name}">{label}</label><input id="{name}" name="{name}" type="{kind}" autocomplete="{ac}" placeholder="{placeholder}" maxlength="{254 if kind == "email" else 30 if kind == "tel" else 100}" required aria-describedby="{name}-error"><p id="{name}-error" class="hardwood-field-error" hidden></p></div>' for name, label, kind, ac, placeholder in fields)
 html = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <!-- ClickCease click-fraud protection -->
@@ -68,23 +69,21 @@ html = f'''<!doctype html>
 <link rel="icon" href="assets/mark.png"><link rel="preload" as="image" href="assets/hero/window-treatments-desktop-poster.webp" media="(min-width:701px)"><link rel="preload" as="image" href="assets/hero/window-treatments-mobile-poster.webp" media="(max-width:700px)"><link rel="preload" as="font" href="assets/manrope-500.ttf" type="font/ttf" crossorigin>
 <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="reviews.css"><link rel="stylesheet" href="gallery.css"><link rel="stylesheet" href="vendor/leaflet/leaflet.css"><link rel="stylesheet" href="beautiful.css"><link rel="stylesheet" href="owner-video.css"><link rel="stylesheet" href="hero-video.css"><link rel="stylesheet" href="conversion-layout.css">
 </head><body class="product-page product-motorized-shades"><noscript><iframe src="https://ob.belvionetta.com/ns/0e13a86f5e1ddc25e31480c0ba4dc8d3.html?ch=" width="0" height="0" style="display:none"></iframe></noscript><a class="skip-link" href="#main-content">Skip to content</a>
-<main class="paper-landing" id="main-content">
+<main class="paper-landing" id="main-content" tabindex="-1">
 <section class="paper-hero" aria-labelledby="paper-heading">
 <div class="hero-media" aria-hidden="true"><picture><source media="(max-width:700px)" srcset="assets/hero/window-treatments-mobile-poster.webp"><img src="assets/hero/window-treatments-desktop-poster.webp" alt="" width="1280" height="720" fetchpriority="high" decoding="async"></picture><video id="hero-video" muted loop playsinline preload="none" disablepictureinpicture tabindex="-1" data-source-mobile="assets/hero/window-treatments-mobile.mp4" data-source-desktop="assets/hero/window-treatments-desktop.mp4"></video></div>
 <header class="paper-header">
 <a href="#main-content" aria-label="Beautiful Blinds &amp; Shades — back to top"><img class="paper-logo" src="assets/logo.png" alt="Beautiful Blinds &amp; Shades" width="500" height="235"></a>
 <div class="paper-header-actions"><a class="paper-header-phone" href="tel:+12602226467" aria-label="Call Beautiful Blinds and Shades at (260) 222-6467">{PHONE}<span>(260) 222-6467</span></a><a href="#consultation" class="paper-button paper-header-button">Free Quote</a></div></header>
-<div class="conversion-hero-grid"><div class="paper-hero-content"><p class="paper-eyebrow">Fort Wayne &amp; Northeast Indiana</p><h1 id="paper-heading">Motorized Shades &amp;<br class="paper-heading-break"> Custom Window Treatments</h1>
-<p class="paper-description">Control light at the touch of a button. Shop custom blinds, shades, and shutters in your own home.</p>
+<div class="conversion-hero-grid"><div class="paper-hero-content"><p class="paper-eyebrow">Fort Wayne &amp; Northeast Indiana</p><h1 id="paper-heading"><span>Custom Window</span> <span>Treatments</span></h1>
+<p class="paper-description">Motorized shades, blinds, and shutters. Shop in your own home.</p>
 </div>
-<div id="consultation" class="consultation-anchor" tabindex="-1"><form id="consultation-form" name="beautiful-blinds-quote" class="hardwood-form" aria-label="Free window treatment quote" novalidate><div class="hardwood-form-heading"><h2>Request a Free Quote</h2><p>David will contact you to arrange your free in-home visit.</p></div><div class="hardwood-honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div><div class="hardwood-form-fields">{inputs}</div><p id="form-status" class="form-status" role="status" tabindex="-1" hidden></p><fieldset class="sms-consent"><legend>Text messages (optional)</legend><label class="sms-consent-option" for="smsOptIn"><input id="smsOptIn" name="smsOptIn" type="checkbox"><span>I agree to receive text messages from <strong>Beautiful Blinds &amp; Shades</strong> about my request, including consultations, appointments, estimates, scheduling, project updates, and customer service, at the phone number provided. Message frequency varies. Message &amp; data rates may apply. Reply <strong>STOP</strong> to opt out or <strong>HELP</strong> for help. Consent is not a condition of purchase.</span></label></fieldset><button class="paper-button hardwood-submit" type="submit">Get My Free Quote</button><p class="hardwood-form-note form-legal">By submitting this form you agree to our <a href="/privacy-policy/" target="_blank">Privacy Policy</a> &amp; <a href="/terms-of-service/" target="_blank">Terms of Service</a>. SMS consent is not shared with third parties.</p><noscript><p>You can also <a href="tel:+12602226467">call (260) 222-6467</a> to request your consultation.</p></noscript></form><div id="consultation-success" class="hardwood-form hardwood-form-success" role="status" tabindex="-1" hidden><span class="hardwood-success-mark" aria-hidden="true">✓</span><h3>Thank you! Your request is in.</h3><p>David will contact you soon to arrange your free in-home visit.</p><a href="tel:+12602226467">Questions? Call (260) 222-6467</a></div></div>
-<div class="conversion-hero-support"><ul class="paper-benefits"><li>Owner measured and installed</li><li>Budget-friendly options</li><li>Warranties backed by local support</li></ul>
-<div class="paper-hero-actions"><a class="paper-button" href="#consultation">Get a Free Quote</a><a class="paper-button paper-button-outline" href="tel:+12602226467">Call (260) 222-6467</a></div>
-<div class="paper-ratings"><a class="paper-rating review-badge" href="#reviews" aria-label="Read Beautiful Blinds and Shades customer reviews">{GOOGLE}<span><strong><span class="badge-stars" aria-label="Five-star customer reviews">★★★★★</span></strong><span class="review-badge-caption">Google Reviews</span></span></a><span class="paper-rating-divider" aria-hidden="true"></span><span class="paper-local-proof">Locally owned<br><span>Fort Wayne, Indiana</span></span></div></div></div>
+<div id="consultation" class="consultation-anchor" tabindex="-1"><form id="consultation-form" name="beautiful-blinds-quote" class="hardwood-form" aria-label="Free window treatment quote" novalidate><div class="hardwood-form-heading"><h2>Get a Free Quote</h2></div><div class="hardwood-honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div><div class="hardwood-form-fields">{inputs}</div><p id="form-status" class="form-status" role="status" tabindex="-1" hidden></p><button class="paper-button hardwood-submit" type="submit">Get My Free Quote</button><p class="hardwood-form-note form-legal"><a href="/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a></p><noscript><p>You can also <a href="tel:+12602226467">call (260) 222-6467</a> to request your consultation.</p></noscript></form><div id="consultation-success" class="hardwood-form hardwood-form-success" role="status" tabindex="-1" hidden><span class="hardwood-success-mark" aria-hidden="true">✓</span><h3>Thank you! Your request is in.</h3><p>David will contact you soon to arrange your free in-home visit.</p><a href="tel:+12602226467">Questions? Call (260) 222-6467</a></div></div>
+</div>
 <button id="hero-video-toggle" class="hero-video-toggle" type="button" aria-controls="hero-video" hidden><svg class="hero-pause-icon" viewBox="0 0 16 16" aria-hidden="true" hidden><path d="M3 2h3v12H3zm7 0h3v12h-3z"/></svg><svg class="hero-play-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2v12l10-6z"/></svg><span class="hero-video-label">Play video</span></button></section>
 
 <section id="reviews" class="reviews-section" aria-label="Beautiful Blinds and Shades customer reviews"><div class="reviews-layout">
-<a class="reviews-summary" href="#reviews" aria-label="Read our Google customer reviews"><span class="reviews-stars" role="img" aria-label="Five-star customer reviews">★★★★★</span><span class="reviews-google-lockup">{GOOGLE}<span>Google<br>Reviews</span></span></a>
+<div class="reviews-summary"><h2 class="reviews-google-lockup">{GOOGLE}<span>Google Reviews</span></h2></div>
 <button class="reviews-arrow reviews-prev" type="button" aria-label="Previous reviews" aria-controls="reviews-track">{LEFT}</button>
 <div class="reviews-track" id="reviews-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Customer reviews; use the arrow keys or swipe to browse">{cards}</div>
 <button class="reviews-arrow reviews-next" type="button" aria-label="Next reviews" aria-controls="reviews-track">{RIGHT}</button></div><p class="reviews-sr-only" id="reviews-position" aria-live="polite" aria-atomic="true"></p></section>
@@ -99,16 +98,16 @@ html = f'''<!doctype html>
 
 <section class="hardwood-section hardwood-made motorized-section" id="motorized-shades"><div class="hardwood-container hardwood-made-grid motorized-grid">
 <div class="hardwood-made-copy"><p class="hardwood-eyebrow">Motorized shades</p><h2>Your shades.<br>At the touch of a button.</h2><p class="hardwood-body">Control light and privacy with a remote. Add app control, schedules, or voice commands with a compatible system.</p><a class="paper-button" href="#consultation">Get a Free Quote</a></div>
-<figure class="hardwood-workshop"><img src="assets/installations/living-room-roller-shades-raised-1440.webp" srcset="assets/installations/living-room-roller-shades-raised-640.webp 640w, assets/installations/living-room-roller-shades-raised-1440.webp 1440w" sizes="(max-width:700px) calc(100vw - 44px), 50vw" alt="Custom roller shades raised above living and dining room windows" loading="lazy" decoding="async" width="1440" height="1080"><figcaption>Effortless light and privacy</figcaption></figure>
+<figure class="hardwood-workshop"><img src="assets/installations/living-room-roller-shades-raised-1440.webp" srcset="assets/installations/living-room-roller-shades-raised-640.webp 640w, assets/installations/living-room-roller-shades-raised-1440.webp 1440w" sizes="(max-width:700px) calc(100vw - 44px), 50vw" alt="Custom roller shades raised above living and dining room windows" loading="lazy" decoding="async" width="1440" height="1080"></figure>
 </div></section>
 
 
 
 <section class="hardwood-section hardwood-value"><div class="hardwood-container"><h2>Quality products. Local expertise.</h2><div class="hardwood-value-grid">
-<article class="hardwood-value-card"><h3>Quality, made to fit.</h3><p>Custom blinds, shades, and shutters for your style and budget.</p></article>
+<article class="hardwood-value-card"><h3>Quality, made to fit.</h3><p>Custom blinds, shades, and shutters with budget-friendly options.</p></article>
 <article class="hardwood-value-card"><h3>Expert installation.</h3><p>Measured, installed, and demonstrated by owner David Fear.</p></article>
 <article class="hardwood-value-card"><h3>Peace of mind.</h3><p>Manufacturer warranties backed by David’s local support.</p></article>
-</div><div class="hardwood-value-cta"><a class="paper-button" href="#consultation">Get a Free Quote</a></div></div></section>
+</div></div></section>
 
 
 
@@ -118,14 +117,15 @@ html = f'''<!doctype html>
 
 <section id="service-area" class="hardwood-section hardwood-service-area"><div class="hardwood-container hardwood-service-area-grid">
 <div class="hardwood-service-area-copy"><p class="hardwood-eyebrow">Local service</p><h2>Serving Fort Wayne<br>&amp; Northeast Indiana.</h2><p class="hardwood-body">Free in-home consultations throughout our service area, including Hicksville, Ohio.</p>
-<ul class="service-featured-cities"><li>Fort Wayne</li><li>Huntertown</li><li>Leo-Cedarville</li><li>New Haven</li><li>Auburn</li><li>Columbia City</li></ul>
 <details class="service-city-details"><summary>View all 17 service communities</summary><ul class="service-city-list">{cities}</ul></details>
-<a class="paper-button service-area-cta" href="#consultation">Get a Free Quote</a></div>
+</div>
 <div class="beautiful-map-column"><div class="beautiful-map-frame"><div id="coverage-map" class="beautiful-service-map" role="region" aria-label="Interactive map with a blue outer outline around Beautiful Blinds and Shades’ 17 service communities"></div><button class="map-reset" type="button" hidden>Show full area</button><p id="map-fallback" class="map-fallback" hidden>We serve Fort Wayne and the 17 communities listed here. <a href="tel:+12602226467">Call (260) 222-6467</a> to confirm service at your address.</p><noscript><p class="map-fallback">Serving the 17 communities listed here. Call (260) 222-6467 to confirm your address.</p></noscript></div><p class="beautiful-map-caption"><span class="map-legend-swatch" aria-hidden="true"></span>Our service area<span>Approximate coverage. Contact us to confirm your address.</span></p></div>
 </div></section>
 
-<section class="hardwood-section hardwood-consultation"><div class="hardwood-container hardwood-consultation-grid"><div><h2>Book your free<br>in-home consultation.</h2><p class="hardwood-body">We bring the samples. You choose your treatments. Get your quote at home.</p><ul class="hardwood-consultation-benefits"><li>Owner measured and installed</li><li>Options for your style and budget</li><li>Warranties backed by local support</li></ul><a class="paper-button" href="tel:+12602226467">Call (260) 222-6467</a><p class="consultation-hours">Monday–Friday · 9 AM–5 PM</p></div>
-<div class="conversion-closing-actions"><a class="paper-button" href="#consultation">Get a Free Quote</a><div class="hardwood-form-reassurance"><span>✓ Free in-home consultation</span><span>✓ No-pressure guidance</span></div><p class="hardwood-form-note">Prefer to speak with David? <a href="tel:+12602226467">Call (260) 222-6467</a>.</p><a class="hardwood-google-badge" href="#reviews">{GOOGLE}<span class="badge-stars" aria-label="Five-star customer reviews">★★★★★</span><span>Google Reviews</span></a></div></div></section>
+<section class="hardwood-section hardwood-consultation" aria-labelledby="closing-heading"><div class="hardwood-container conversion-closing">
+<h2 id="closing-heading">Book your free<br>in-home consultation.</h2><p class="hardwood-body">We bring the samples. You choose your treatments. Get your quote at home.</p>
+<a class="paper-button" href="#consultation">Get a Free Quote</a><p class="conversion-closing-phone"><a href="tel:+12602226467">Call (260) 222-6467</a></p><p class="consultation-hours">Monday–Friday · 9 AM–5 PM</p>
+</div></section>
 
 </main><footer class="footer"><div><strong>Beautiful Blinds &amp; Shades</strong><br>Fort Wayne &amp; Northeast Indiana</div><div class="footer-links"><a href="tel:+12602226467">(260) 222-6467</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms-of-service/">Terms of Service</a></div><span>© 2026 Beautiful Blinds &amp; Shades</span></footer>
 <nav class="mobile-conversion-bar" aria-label="Quick contact"><a class="mobile-action mobile-action-call" href="tel:+12602226467" aria-label="Call Beautiful Blinds and Shades at (260) 222-6467">{PHONE}<span>Call</span></a><a class="mobile-action mobile-action-quote" href="#consultation">Free Quote</a></nav>

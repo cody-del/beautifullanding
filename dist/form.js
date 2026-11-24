@@ -132,8 +132,8 @@ function humanCheck(form) {
       const payload = Object.fromEntries(new FormData(form));
       // Time since the page started loading, on this browser's own clock.
       payload.elapsedMs = Math.round(performance.now());
-      // FormData leaves an unticked box out and sends a ticked one as "on"; send a boolean.
-      payload.smsOptIn = form.smsOptIn.checked === true;
+      // This quote form does not request SMS consent. A phone number never opts a visitor into texts.
+      payload.smsOptIn = false;
       payload['cf-turnstile-response'] = token;
       attempted = true;
       const response = await fetch('/api/consultation', {
