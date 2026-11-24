@@ -3,6 +3,7 @@
   const video = document.querySelector('#hero-video');
   const button = document.querySelector('#hero-video-toggle');
   if (!hero || !video || !button) return;
+  const media = hero.querySelector('.hero-media') || hero;
 
   const label = button.querySelector('.hero-video-label');
   const pauseIcon = button.querySelector('.hero-pause-icon');
@@ -63,8 +64,21 @@
       const entry = entries[entries.length - 1];
       inView = entry.isIntersecting && entry.intersectionRatio > 0;
       syncPlayback();
-    }, {threshold: [0]}).observe(hero);
+    }, {threshold: [0]}).observe(media);
   }
+
+  // Check the actual backdrop as well when a browser delays observer updates.
+  let scrollQueued = false;
+  window.addEventListener('scroll', () => {
+    if (scrollQueued) return;
+    scrollQueued = true;
+    requestAnimationFrame(() => {
+      scrollQueued = false;
+      const bounds = media.getBoundingClientRect();
+      inView = bounds.bottom > 0 && bounds.top < window.innerHeight;
+      syncPlayback();
+    });
+  }, {passive: true});
 
   button.hidden = false;
   updateControl();

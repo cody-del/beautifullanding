@@ -9,7 +9,10 @@ const source = fs.readFileSync(path.join(__dirname, '../dist/hero-video.js'), 'u
 function setup({reduced = false, saveData = false, mobile = false, observer = true} = {}) {
   const listeners = new Map();
   const classes = new Set();
-  const hero = {};
+  let bounds = {top: 0, bottom: 600};
+  const backdrop = {getBoundingClientRect() { return bounds; }};
+  let onScroll;
+  const hero = {querySelector(selector) { assert.equal(selector, '.hero-media'); return backdrop; }};
   const label = {};
   const icon = () => ({toggleAttribute(name, value) { assert.equal(name, 'hidden'); this.hidden = value; }});
   const pauseIcon = icon();
@@ -45,15 +48,18 @@ function setup({reduced = false, saveData = false, mobile = false, observer = tr
   vm.runInNewContext(source, {
     document, navigator: {connection: {saveData}},
     matchMedia(query) { return query.includes('reduced-motion') ? motion : {matches: mobile}; },
-    window: observer ? {IntersectionObserver: true} : {},
+    window: { ...(observer ? {IntersectionObserver: true} : {}), innerHeight: 800,
+      addEventListener(name, fn) { assert.equal(name, 'scroll'); onScroll = fn; } },
+    requestAnimationFrame(fn) { fn(); },
     IntersectionObserver: class {
       constructor(fn) { intersection = fn; }
-      observe(target) { assert.equal(target, hero); }
+      observe(target) { assert.equal(target, backdrop); }
     }
   });
   return {
     video, button, label, pauseIcon, playIcon, classes,
     view(ratio) { intersection([{isIntersecting: ratio > 0, intersectionRatio: ratio}]); },
+    scroll(top, bottom) { bounds = {top, bottom}; onScroll(); },
     hide(hidden) { document.hidden = hidden; document.visibilitychange(); },
     reduce(matches) { motion.matches = matches; motion.change(); }
   };
@@ -110,6 +116,18 @@ test('reduced motion and data saver show the poster without downloading video, w
     assert.equal(p.video.paused, false);
     if (options.saveData) assert.equal(p.video.src, 'mobile.mp4');
   }
+});
+
+test('scroll geometry pauses the shorter backdrop even if observer updates are delayed', () => {
+  const p = setup();
+  p.view(1);
+  p.scroll(-500, -80);
+  assert.equal(p.video.paused, true);
+  p.scroll(-100, 320);
+  assert.equal(p.video.paused, false);
+  p.button.click();
+  p.scroll(-500, -80); p.scroll(0, 420);
+  assert.equal(p.video.paused, true);
 });
 
 test('enabling reduced motion pauses the clip and does not restart it on scrolling', () => {
